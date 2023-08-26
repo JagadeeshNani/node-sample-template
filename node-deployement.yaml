@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    release: beta
+    type: poc
+  name: sample-node-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: poc
+  template:
+    metadata:
+      labels:
+        release: beta
+        type: poc
+        editor: vscode
+      name: sample-node-service-pod
+    spec:
+      containers:
+        - name: sample-node-container
+          image: myproject/sample-node-service
+          ports:
+            - containerPort: 8081
+          imagePullPolicy: IfNotPresent
